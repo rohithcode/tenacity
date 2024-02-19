@@ -1,0 +1,13 @@
+credentials:
+  usernames:
+    Tynybay:
+      email: admin@tynybay.ai
+      name: admin Tynybay
+      password: $2b$12$PH/6FfUC9csULmv.JdHJned/AnMYz2x3mKZiX4Kpg2wT/31z6E6GG # To be replaced with hashed password
+cookie:
+  expiry_days: 30
+  key: some_signature_key # Must be string
+  name: some_cookie_name
+preauthorized:
+  emails:
+    - melsby@gmail.com
