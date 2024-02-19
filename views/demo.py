@@ -4,7 +4,7 @@ import openai
 from llama_index.prompts import ChatPromptTemplate
 from llama_index.chat_engine import SimpleChatEngine
 def load_demo():
-    openai.api_key = st.secrets["openai_key"]
+    openai.api_key = st.secrets.openai_api_key
 
 
     st.title("Let's Achieve your goals")
