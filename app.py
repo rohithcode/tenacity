@@ -96,8 +96,6 @@ if authentication_status:
         if st.session_state.messages[-1]["role"] != "assistant":
             with st.chat_message("assistant"):
                 with st.spinner("Thinking..."):
-                    # print("s mess",st.session_state.messages)
-                    # st.session_state.custom_chat_history
                     response = st.session_state.chat_engine.chat(prompt,st.session_state.custom_chat_history)
                     st.write(response.response)
                     message = {"role": "assistant", "content": response.response}
