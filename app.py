@@ -10,6 +10,7 @@ from llama_index.llms import OpenAI,ChatMessage,MessageRole
 import openai
 from llama_index.prompts import ChatPromptTemplate
 from llama_index.chat_engine import SimpleChatEngine
+from streamlit import session_state
 # st.subheader("Welcome to Tenacity!")
 
 with open('config.yaml') as file:
@@ -35,25 +36,26 @@ if authentication_status:
         st.title("Let's Achieve your goals")
 
         if "messages" not in st.session_state.keys(): # Initialize the chat messages history
-            st.session_state.messages = [{'role': 'assistant', 'content': 'How may i help you!'}] 
-            st.session_state.custom_chat_history = [
-            
-            ]
-            for msg in st.session_state.messages:
-                if msg["role"] == "user":
-                    st.session_state.custom_chat_history.append(
-                        ChatMessage(
-                            role=MessageRole.USER,
-                            content=msg["content"],
+            st.session_state.messages = [{'role': 'assistant', 'content': 'How may i help you!'}]
+            if "custom_chat_history" not in st.session_state.keys(): 
+                st.session_state.custom_chat_history = [
+                
+                ]
+                for msg in st.session_state.messages:
+                    if msg["role"] == "user":
+                        st.session_state.custom_chat_history.append(
+                            ChatMessage(
+                                role=MessageRole.USER,
+                                content=msg["content"],
+                            )
                         )
-                    )
-                else:
-                    st.session_state.custom_chat_history.append(
-                        ChatMessage(
-                            role=MessageRole.ASSISTANT,
-                            content=msg["content"],
+                    else:
+                        st.session_state.custom_chat_history.append(
+                            ChatMessage(
+                                role=MessageRole.ASSISTANT,
+                                content=msg["content"],
+                            )
                         )
-                    )
         if "chat_engine" not in st.session_state.keys():
             st.session_state.chat_engine = SimpleChatEngine.from_defaults(
                 llm=OpenAI(temperature=0, model_name="gpt-4"),
